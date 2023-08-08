@@ -7,6 +7,7 @@ import { HomeComponent } from './features/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './features/auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthModule } from './features/auth/auth.module';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    AuthModule
+    AuthModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
