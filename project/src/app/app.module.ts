@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './features/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { appInterceptorProvider } from './app.interceptor';
+
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     AppComponent,
     HomeComponent,
     AuthenticateComponent,
+
     
   ],
   imports: [
@@ -26,7 +29,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     AuthModule,
     SharedModule
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

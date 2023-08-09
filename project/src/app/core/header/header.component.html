@@ -6,11 +6,11 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="/themes">Themes</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/new-theme">Create New Theme</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/profile">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/register">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/new-theme" *ngIf="isLoggedIn">Create New Theme</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/profile" *ngIf="isLoggedIn">{{username}}'s Profile</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn">Login</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/register" *ngIf="!isLoggedIn">Register</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="logout()" *ngIf="isLoggedIn" style="cursor: pointer;">Logout</a></li>
             </ul>
         </div>
     </div>

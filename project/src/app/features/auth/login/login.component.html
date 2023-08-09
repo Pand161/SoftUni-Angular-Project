@@ -6,27 +6,66 @@
             class="img-fluid" alt="Sample image" style="border-radius: 10px;">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form>
+          <form #form="ngForm" (ngSubmit)="login(form)">
 
             <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+            
+            <!-- Email error -->
+
+            <ng-container *ngIf="inputEmail.touched">
+              <p class="error" *ngIf="inputEmail.errors?.['required']" style="color:red">
+                Email is required!
+              </p>
+              <p class="error" *ngIf="inputEmail.errors?.['minlength']" style="color:red">
+                Email must be atleast 7 characters!
+              </p>
+              <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']" style="color:red">
+                Email is not valid!
+              </p>
+            </ng-container>
+
             <!-- Email input -->
+
             <div class="form-outline mb-4">
-              <input type="email" id="form3Example3" class="form-control form-control-lg"
+              <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="john.doe@gmail.com"
+              ngModel
+              #inputEmail="ngModel"
+              required 
+              minlength="7"
+              [appEmail]="emailDomains"
+              class="form-control form-control-lg"
                 placeholder="Enter a valid email address" />
-              <label class="form-label" for="form3Example3">Email address</label>
+              <label class="form-label" for="email">Email address</label>
             </div>
+
+            
+            <ng-container *ngIf="inputPassword.touched">
+              <p class="error" *ngIf="inputPassword.errors?.['required']" style="color:red">
+                Password is required!
+              </p>
+              <p class="error" *ngIf="inputPassword.errors?.['minlength']" style="color:red">
+                Password must be at least 5
+              </p>
+            </ng-container>
   
             <!-- Password input -->
             <div class="form-outline mb-3">
-              <input type="password" id="form3Example4" class="form-control form-control-lg"
-                placeholder="Enter password" />
-              <label class="form-label" for="form3Example4">Password</label>
+              <input type="password" id="password" name="password" class="form-control form-control-lg"
+                placeholder="Enter password"
+                #inputPassword="ngModel"
+                ngModel
+                required
+                minlength="5" />
+              <label class="form-label" for="password">Password</label>
             </div>
-  
-  
+            
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="button" class="btn btn-primary btn-lg"
-                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+              <button type="submit" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="form.invalid">Login</button>
               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a routerLink="/register"
                   class="link-danger">Sign up</a></p>
             </div>

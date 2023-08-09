@@ -9,45 +9,105 @@
   
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
   
-                  <form class="mx-1 mx-md-4">
+                  <form class="mx-1 mx-md-4" #form="ngForm" (ngSubmit)="register(form)">
+
+                    <ng-container *ngIf="inputUsername.touched">
+                      <p class="error" *ngIf="inputUsername.errors?.['required']" style="color:red">
+                        Username is required!
+                      </p>
+                      <p class="error" *ngIf="inputUsername.errors?.['minlength']" style="color:red">
+                        Username must be atleast 5 characters!
+                      </p>
+                    </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control"/>
-                        <label class="form-label" for="form3Example1c">Your Name</label>
+                        <input type="text" 
+                        id="username" 
+                        name="username" 
+                        #inputUsername="ngModel" 
+                        ngModel 
+                        placeholder="John Doe" 
+                        required 
+                        minlength="5"  
+                        class="form-control"/>
+                        <label class="form-label" for="form3Example1c">Username</label>
                         
                       </div>
                     </div>
+
+                    <!-- Email error -->
+
+                    <ng-container *ngIf="inputEmail.touched">
+                      <p class="error" *ngIf="inputEmail.errors?.['required']" style="color:red">
+                        Email is required!
+                      </p>
+                      <p class="error" *ngIf="inputEmail.errors?.['minlength']" style="color:red">
+                        Email must be atleast 7 characters!
+                      </p>
+                      <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']" style="color:red">
+                        Email is not valid!
+                      </p>
+                    </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" />
-                        <label class="form-label" for="form3Example3c">Your Email</label>
+                        <input type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="john.doe@gmail.com"
+                        ngModel
+                        #inputEmail="ngModel"
+                        required 
+                        minlength="7"
+                        [appEmail]="emailDomains" class="form-control" />
+                        <label class="form-label" for="email">Your Email</label>
                       </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="tel" id="form3Example3c" class="form-control" placeholder="+359..."/>
-                        <label class="form-label" for="form3Example3c">Telephone</label>
+                        <input type="tel" id="tel" name="tel" class="form-control" placeholder="+359..."/>
+                        <label class="form-label" for="tel">Telephone</label>
                       </div>
                     </div>
+
+                    <!-- Password Errors -->
+
+                    <ng-container *ngIf="inputPassword.touched">
+                      <p class="error" *ngIf="inputPassword.errors?.['required']" style="color:red">
+                        Password is required!
+                      </p>
+                      <p class="error" *ngIf="inputPassword.errors?.['minlength']" style="color:red">
+                        Password must be atleast 8 characters!
+                      </p>
+                    </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" />
-                        <label class="form-label" for="form3Example4c">Password</label>
+                        <input type="password" id="password" name="password" #inputPassword="ngModel" ngModel required minlength="8" class="form-control" />
+                        <label class="form-label" for="password">Password</label>
                       </div>
                     </div>
-  
+
+                    <!-- rePassword Errors -->
+                    <ng-container *ngIf="inputRePassword.touched">
+                      <p class="error" *ngIf="inputRePassword.errors?.['required']" style="color:red">
+                        Repeat password is required!
+                      </p>
+                      <p class="error" *ngIf="inputRePassword.value != inputPassword.value" style="color:red">
+                        Passwords don't match!
+                      </p>
+                    </ng-container>
+                    
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4cd" class="form-control" />
+                        <input type="password" id="rePassword" name="rePassword" #inputRePassword="ngModel" ngModel required class="form-control" />
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
@@ -59,7 +119,7 @@
                     </div>
   
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="button" class="btn btn-primary btn-lg">Register</button>
+                      <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid || inputRePassword.value != inputPassword.value">Register</button>
                     </div>
   
                   </form>
