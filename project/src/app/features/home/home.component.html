@@ -11,12 +11,14 @@
       </div>
     </div>
     <!-- Call to Action-->
-    <div class="card text-white bg-secondary my-5 py-4 text-center">
-      <div class="card-body"><p class="text-white m-0">Here is our latest post looking for help!</p></div>
-    </div>
+    
     <!-- Content Row-->
 
     <div *ngIf="lastPost">
+      <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body"><p class="text-white m-0">Here is our latest post looking for help!</p></div>
+      </div>
+
     <div class="card mb-5" style="border-radius: 15px;">
       <div class="card-body p-4">
         <h3 class="mb-3">{{lastPost.themeName}}</h3>
@@ -25,12 +27,20 @@
         <hr class="my-4">
         <div class="d-flex justify-content-start align-items-center">
 
-          <button type="button" class="btn btn-outline-dark btn-sm btn-floating" [routerLink]="lastPost._id">
+          <button type="button" class="btn btn-outline-dark btn-sm btn-floating" [routerLink]="['/theme/themes/', lastPost._id]">
             <i class="fas fa-plus">Learn More</i>
           </button>
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="!lastPost">
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+      <div class="card-body"><p class="text-white m-0">There are no recent themes be tthe first one!</p></div>
+    </div>
+
+    
+</div>
 
   </div>

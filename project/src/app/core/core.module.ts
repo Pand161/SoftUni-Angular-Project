@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthActivate } from './guards/auth.activate';
 
 
 @NgModule({
