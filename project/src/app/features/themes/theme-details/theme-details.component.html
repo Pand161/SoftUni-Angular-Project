@@ -29,9 +29,9 @@
                     <br>
                     <div class="d-flex justify-content-start align-items-center">
                         <div style="padding-right: 5px;">
-                      <button class="btn btn-primary" id="submitComment" style="background-color: green; border: none; margin: right 5px;">Edit</button>
+                      <button class="btn btn-primary" id="submitComment" style="background-color: green; border: none; margin: right 5px;" [routerLink]="['/theme/post-edit', post._id]">Edit</button>
                     </div>
-                      <button class="btn btn-primary" id="submitComment" style="background-color: red; border: none;">Delete</button>
+                      <button class="btn btn-primary" id="submitComment" style="background-color: red; border: none;" (click)="deletePost(post._id)">Delete</button>
                       </div>
                     </div>
                   </div>
@@ -39,11 +39,23 @@
       </div>
     </div>
     <div class="mb-3" *ngIf="isLogged">
-        <label for="commentText" class="form-label">Post a comment</label>
-        <textarea class="form-control" id="commentText" rows="4"></textarea>
+        <form #form="ngForm" (ngSubmit)="postComment(form)">
+        <label for="commentText" class="post-label">Post a comment</label>
+
+        <ng-container *ngIf="inpuPost.touched">
+            <p class="error" *ngIf="inpuPost.errors?.['required']" style="color:red">
+                Post text is requried!
+            </p>
+            <p class="error" *ngIf="inpuPost.errors?.['minlength']" style="color:red">
+                Post must be atleast 10 characters long!
+            </p>
+        </ng-container>
+
+        <textarea class="form-control" id="postText" name="postText" minlength="10" rows="4" required ngModel #inpuPost="ngModel"></textarea>
         <br>
-        <button class="btn btn-primary" id="submitComment">Post</button>
-      </div>
+        <button class="btn btn-primary" id="submitComment" type="submit" [disabled]="form.invalid">Post</button>
+        </form>
+    </div>
 </div>
 <br>
 </div>

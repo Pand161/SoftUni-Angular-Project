@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ThemesAllComponent } from './themes-all/themes-all.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
 import { ThemeAddComponent } from './theme-add/theme-add.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
 
 
 
@@ -24,6 +25,10 @@ const routes: Routes = [
     {
         path: 'add-theme',
         component:ThemeAddComponent
+    },
+    {
+        path: 'post-edit/:postId',
+        component: PostEditComponent
     }
 ];
 

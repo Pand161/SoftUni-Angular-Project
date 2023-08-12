@@ -108,20 +108,14 @@
   
                     <div class="form-check d-flex justify-content-center mb-5">
                       <label class="form-check-label" for="login">
-                        Already have a Profile? <a routerLink="/login">Sign in</a>
+                        Already have a Profile? <a routerLink="/auth/login">Sign in</a>
                       </label>
                     </div>
   
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid || inputRePassword.value != inputPassword.value">Register</button>
                     </div>
-                    <ng-container *ngIf="errMessage">
-                    <div style="background-color: red; color: red;"><p>{{ errMessage }}</p>
-                    </div>
-                  </ng-container>
-                    <div style="color: red;">
-                    <p> aaa</p>
-                  </div>
+                    
                   </form>
   
                 </div>

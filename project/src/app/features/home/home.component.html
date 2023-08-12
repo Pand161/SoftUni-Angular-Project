@@ -5,8 +5,8 @@
       <div class="col-lg-5">
         <h1 class="font-weight-light">Green Ideas</h1>
         <p>Our website unites communities to help each other. <br>
-          We make gatherings to clean the nature around us. <br>
-          See for yourself by cheking out where you can help.</p>
+          We make themes which are looking for ideas to help out on problems with wild life. <br>
+          Share your ideas with us.</p>
         <a class="btn btn-primary" routerLink="/theme/themes">I'm Interested</a>
       </div>
     </div>
@@ -16,23 +16,21 @@
     </div>
     <!-- Content Row-->
 
-
+    <div *ngIf="lastPost">
     <div class="card mb-5" style="border-radius: 15px;">
       <div class="card-body p-4">
-        <h3 class="mb-3">Program Title</h3>
-        <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span> Created by
-          <strong>MDBootstrap</strong> on 11 April , 2021</p>
+        <h3 class="mb-3">{{lastPost.themeName}}</h3>
+        <p class="small mb-0"><i class="far fa-star fa-lg"></i> Created by
+          <strong>{{lastPost.userId.username}}</strong> {{lastPost.created_at | elapsedTime}}</p>
         <hr class="my-4">
         <div class="d-flex justify-content-start align-items-center">
 
-          <a href="#!">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" alt="avatar"
-              class="img-fluid rounded-circle me-3" width="35">
-          </a>
-          <button type="button" class="btn btn-outline-dark btn-sm btn-floating">
+          <button type="button" class="btn btn-outline-dark btn-sm btn-floating" [routerLink]="lastPost._id">
             <i class="fas fa-plus">Learn More</i>
           </button>
         </div>
       </div>
     </div>
+  </div>
+
   </div>

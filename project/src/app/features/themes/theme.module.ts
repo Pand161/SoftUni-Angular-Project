@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ThemeRoutingModule } from './theme-routing.module';
 import { ThemeAddComponent } from './theme-add/theme-add.component';
 import { ThemeEditComponent } from './theme-edit/theme-edit.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
 
 
 
@@ -19,6 +20,7 @@ import { ThemeEditComponent } from './theme-edit/theme-edit.component';
     ThemesAllComponent,
     ThemeAddComponent,
     ThemeEditComponent,
+    PostEditComponent,
 
   ],
   imports: [
