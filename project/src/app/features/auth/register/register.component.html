@@ -8,8 +8,12 @@
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
   
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                  
+
   
                   <form class="mx-1 mx-md-4" #form="ngForm" (ngSubmit)="register(form)">
+                    
 
                     <ng-container *ngIf="inputUsername.touched">
                       <p class="error" *ngIf="inputUsername.errors?.['required']" style="color:red">
@@ -21,7 +25,6 @@
                     </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" 
                         id="username" 
@@ -32,7 +35,7 @@
                         required 
                         minlength="5"  
                         class="form-control"/>
-                        <label class="form-label" for="form3Example1c">Username</label>
+                        <label class="form-label" for="username">Username</label>
                         
                       </div>
                     </div>
@@ -52,7 +55,7 @@
                     </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+
                       <div class="form-outline flex-fill mb-0">
                         <input type="email" 
                         id="email" 
@@ -67,13 +70,6 @@
                       </div>
                     </div>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="tel" id="tel" name="tel" class="form-control" placeholder="+359..."/>
-                        <label class="form-label" for="tel">Telephone</label>
-                      </div>
-                    </div>
 
                     <!-- Password Errors -->
 
@@ -82,14 +78,13 @@
                         Password is required!
                       </p>
                       <p class="error" *ngIf="inputPassword.errors?.['minlength']" style="color:red">
-                        Password must be atleast 8 characters!
+                        Password must be atleast 5 characters!
                       </p>
                     </ng-container>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="password" name="password" #inputPassword="ngModel" ngModel required minlength="8" class="form-control" />
+                        <input type="password" id="password" name="password" #inputPassword="ngModel" ngModel required minlength="5" class="form-control" />
                         <label class="form-label" for="password">Password</label>
                       </div>
                     </div>
@@ -105,7 +100,6 @@
                     </ng-container>
                     
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="password" id="rePassword" name="rePassword" #inputRePassword="ngModel" ngModel required class="form-control" />
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
@@ -113,7 +107,7 @@
                     </div>
   
                     <div class="form-check d-flex justify-content-center mb-5">
-                      <label class="form-check-label" for="form2Example3">
+                      <label class="form-check-label" for="login">
                         Already have a Profile? <a routerLink="/login">Sign in</a>
                       </label>
                     </div>
@@ -121,7 +115,13 @@
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid || inputRePassword.value != inputPassword.value">Register</button>
                     </div>
-  
+                    <ng-container *ngIf="errMessage">
+                    <div style="background-color: red; color: red;"><p>{{ errMessage }}</p>
+                    </div>
+                  </ng-container>
+                    <div style="color: red;">
+                    <p> aaa</p>
+                  </div>
                   </form>
   
                 </div>

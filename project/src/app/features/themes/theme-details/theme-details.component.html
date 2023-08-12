@@ -1,0 +1,49 @@
+<div *ngIf="theme">
+    <br>
+<div class="container px-4 px-lg-5" >
+    <!-- Details Row-->
+    <div class="card mb-5" style="border-radius: 15px;">
+        <div class="card-body p-4">
+          <h3 class="mb-3">{{theme.themeName}}</h3>
+          <p class="small mb-0"><i class="far fa-star fa-lg"></i> Created 
+            <strong>{{theme.userId.username}}</strong> {{theme.created_at | elapsedTime}}</p>
+        </div>
+    </div>
+       
+
+    <!-- Comment Section -->
+    <div class="container px-4 px-lg-5" >
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Comments</h3>
+
+        <div *ngFor="let post of theme.posts">
+            <div class="card mb-5" style="border-radius: 15px;" >
+            <div class="card-body p-4">
+                <p class="mb-3">{{post.text}}</p>
+                <hr>
+                <p class="small mb-0"><i class="far fa-star fa-lg"></i> Posted by
+                  <strong>{{post.userId.username}}</strong> {{post.created_at | elapsedTime}}</p>
+
+                  <div *ngIf="post.userId._id == userId">
+                    <br>
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div style="padding-right: 5px;">
+                      <button class="btn btn-primary" id="submitComment" style="background-color: green; border: none; margin: right 5px;">Edit</button>
+                    </div>
+                      <button class="btn btn-primary" id="submitComment" style="background-color: red; border: none;">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="isLogged">
+        <label for="commentText" class="form-label">Post a comment</label>
+        <textarea class="form-control" id="commentText" rows="4"></textarea>
+        <br>
+        <button class="btn btn-primary" id="submitComment">Post</button>
+      </div>
+</div>
+<br>
+</div>

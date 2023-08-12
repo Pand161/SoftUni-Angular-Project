@@ -28,6 +28,12 @@ export class ApiService {
     return this.http.get<Theme[]>(`${apiUrl}/themes`);
   }
 
+  getLastTheme(limit?: number) {
+    const { apiUrl } = environment;
+    const limitCount = limit ? `?limit=${limit}` : '';
+    return this.http.get<Theme[]>(`${apiUrl}/themes${limitCount}`);
+  }
+
   createTheme(themeName: string, postText: string) {
     return this.http.post<Theme>('/api/themes', { themeName, postText });
   }
@@ -40,5 +46,21 @@ export class ApiService {
     return this.http
       .get<Post[]>(`${apiUrl}/posts${limitFilter}`)
       .pipe(tap((posts) => (this.posts = posts)));
+  }
+
+  postComment(postText: string, themeId: string) {
+    return this.http.post<Post>(`/api/themes/${themeId}`, { postText })
+  }
+
+  likePost(postId: string) {
+    return this.http.put<Post>(`/api/likes/${postId}`, {})
+  }
+
+  updatePost(themeId: string, postId: string, postText: string) {
+    return this.http.put(`/api/themes/${themeId}/posts/${postId}`, { postText })
+  }
+
+  deletePost(themeId: string, postId: string) {
+    return this.http.delete(`/api/themes/${themeId}/posts/${postId}`, {})
   }
 }

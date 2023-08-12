@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './features/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { AuthModule } from './features/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
-import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { appInterceptorProvider } from './app.interceptor';
+import { ThemeModule } from './features/themes/theme.module';
+import { AuthModule } from './features/auth/auth.module';
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 
 
@@ -17,7 +18,8 @@ import { appInterceptorProvider } from './app.interceptor';
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthenticateComponent,
+    NotFoundComponent,
+
 
     
   ],
@@ -25,9 +27,10 @@ import { appInterceptorProvider } from './app.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CoreModule,
     AuthModule,
-    SharedModule
+    CoreModule,
+    SharedModule,
+    ThemeModule
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]

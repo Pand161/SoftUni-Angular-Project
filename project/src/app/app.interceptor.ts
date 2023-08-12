@@ -31,7 +31,7 @@ import {
       return next.handle(req).pipe(
         catchError((err) => {
           if (err.status === 401) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
           } else {
             this.errorService.setError(err);
             this.router.navigate(['/error']);

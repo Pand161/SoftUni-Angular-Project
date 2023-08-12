@@ -3,13 +3,14 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-6 mb-4 mb-lg-0">
           <div class="card mb-3" style="border-radius: .5rem;">
-            <div class="row g-0">
+
+            <div class="row g-0" *ngIf="!editMode">
               <div class="col-md-4 gradient-custom text-center text-black"
                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                <img src="https://www.seekpng.com/png/detail/41-410093_circled-user-icon-user-profile-icon-png.png"
                   alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
                   <h6>Username</h6>
-                <h5>Marie Horwitz</h5>
+                <h5>{{user?.username}}</h5>
                 <i class="far fa-edit mb-5"></i>
               </div>
               <div class="col-md-8">
@@ -19,20 +20,86 @@
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
                       <h6>Email</h6>
-                      <p class="text-muted">info@example.com</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>Phone</h6>
-                      <p class="text-muted">123 456 789</p>
+                      <p class="text-muted">{{user?.email}}</p>
                     </div>
                   </div>
                   <div class="d-flex justify-content-center">
 
-                    <button type="button" class="btn btn-primary btn-lg">Edit</button>
+                    <button type="button" class="btn btn-primary btn-lg" (click)="toggleEditMode()">Edit</button>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
+            <!-- Edit Mode -->
+            <form *ngIf="editMode" #form="ngForm" (ngSubmit)="updateProfile(form)">
+            <div class="row g-0 mt-4" id="editForm">
+              <div class="col-md-4 gradient-custom text-center text-black"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="https://www.seekpng.com/png/detail/41-410093_circled-user-icon-user-profile-icon-png.png"
+                  alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                <h6>Edit Username</h6>
+                <input type="text" 
+                id="username" 
+                name="username" 
+                #inputUsername="ngModel" 
+                ngModel 
+                required 
+                minlength="5"  
+                class="form-control" >
+
+
+                <ng-container *ngIf="inputUsername.touched">
+                  <p class="error" *ngIf="inputUsername.errors?.['required']" style="color:red">
+                    Username is required!
+                  </p>
+                  <p class="error" *ngIf="inputUsername.errors?.['minlength']" style="color:red">
+                    Username must be atleast 5 characters!
+                  </p>
+                </ng-container>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Edit Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Edit Email</h6>
+                      <input type="email" 
+                      id="email" 
+                      name="email" 
+                      ngModel
+                      #inputEmail="ngModel"
+                      required 
+                      minlength="7"
+                      [appEmail]="emailDomains"
+                      class="form-control form-control-lg" value="{{user?.email}}">
+                    </div>
+
+                    <ng-container *ngIf="inputEmail.touched">
+                      <p class="error" *ngIf="inputEmail.errors?.['required']" style="color:red">
+                        Email is required!
+                      </p>
+                      <p class="error" *ngIf="inputEmail.errors?.['minlength']" style="color:red">
+                        Email must be atleast 7 characters!
+                      </p>
+                      <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']" style="color:red">
+                        Email is not valid!
+                      </p>
+                    </ng-container>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-lg" id="saveButton" style="background-color: green; border: none;">Save</button>
+                    <button type="button" class="btn btn-secondary btn-lg ml-2" id="cancelButton" style="background-color: red; border: none; " (click)="toggleEditMode()" >Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+            
+
           </div>
         </div>
       </div>
