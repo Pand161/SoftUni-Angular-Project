@@ -10,7 +10,6 @@ import { Theme } from 'src/app/types/theme';
 })
 export class ThemesAllComponent implements OnInit, OnDestroy {
   themesList: Theme[] = [];
-  isLoading: boolean = true;
   subscription!: Subscription;
 
   constructor(private apiService: ApiService) {}
@@ -19,7 +18,6 @@ export class ThemesAllComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.apiService.getThemes().subscribe((themes) => {
         this.themesList = themes;
-        this.isLoading = false;
       }
     );
   }
